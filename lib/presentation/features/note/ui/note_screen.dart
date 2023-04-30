@@ -119,7 +119,6 @@ class NoteScreen extends HookWidget {
                           validator: (value) =>
                               (value ?? '').isEmpty ? 'Required' : null,
                         ),
-                        const SizedBox(height: 600.0),
                       ],
                     ),
                   ),
