@@ -73,7 +73,7 @@ class RemoteNotesRepository extends NotesRepository {
 
       return response.data.map((e) => e.toNote).toList();
     } catch (error, stacktrace) {
-      throw DeleteNoteException(error: error, stackTrace: stacktrace);
+      throw LoadNotesException(error: error, stackTrace: stacktrace);
     }
   }
 
