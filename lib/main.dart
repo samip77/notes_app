@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
+import 'package:notes_app/data/features/notes/remote_notes/remote_notes_service.dart';
 import 'package:notes_app/domain/features/notes/repository/notes_repository.dart';
 
 import 'package:notes_app/presentation/features/notes/bloc/notes_event.dart';
@@ -9,7 +10,8 @@ import 'package:notes_app/presentation/utilites/app_bloc_observer.dart';
 import 'package:notes_app/presentation/utilites/snackbar.dart';
 import 'package:path_provider/path_provider.dart';
 
-import 'data/features/notes/local_notes/local_notes_repository.dart';
+import 'data/features/notes/local_notes/local_notes_service.dart';
+import 'data/http_client/api_client.dart';
 import 'presentation/features/note/bloc/note_bloc.dart';
 import 'presentation/features/notes/bloc/notes_bloc.dart';
 import 'presentation/router/router.dart';
@@ -42,7 +44,14 @@ class MyApp extends StatelessWidget {
         //   ),
         // ),
         RepositoryProvider<NotesRepository>(
-          create: (context) => LocalNotesRepository(),
+          create: (context) => NotesRepository(
+            remoteNotesService: RemoteNotesService(
+              client: ApiClient(
+                baseUrl: 'http://localhost:3000',
+              ),
+            ),
+            localNotesService: LocalNotesService(),
+          ),
         ),
       ],
       child: MultiBlocProvider(

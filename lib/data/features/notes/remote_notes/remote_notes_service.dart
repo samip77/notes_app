@@ -4,12 +4,12 @@ import 'package:notes_app/data/http_client/api_client.dart';
 
 import '../../../../domain/exceptions/notes_exception.dart';
 import '../../../../domain/features/notes/models/note.dart';
-import '../../../../domain/features/notes/repository/notes_repository.dart';
+import '../../../../domain/features/notes/repository/notes_service.dart';
 import 'models/get_note_response.dart';
 import 'models/get_notes_response.dart';
 
-class RemoteNotesRepository extends NotesRepository {
-  RemoteNotesRepository({required this.client});
+class RemoteNotesService extends NotesService {
+  RemoteNotesService({required this.client});
 
   final ApiClient client;
 

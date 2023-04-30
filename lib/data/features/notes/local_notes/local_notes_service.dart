@@ -2,11 +2,11 @@ import 'package:hive/hive.dart';
 
 import '../../../../domain/exceptions/notes_exception.dart';
 import '../../../../domain/features/notes/models/note.dart';
-import '../../../../domain/features/notes/repository/notes_repository.dart';
+import '../../../../domain/features/notes/repository/notes_service.dart';
 import 'models/local_note.dart';
 
-class LocalNotesRepository extends NotesRepository {
-  LocalNotesRepository() {
+class LocalNotesService extends NotesService {
+  LocalNotesService() {
     Hive.registerAdapter(LocalNoteAdapter());
   }
 

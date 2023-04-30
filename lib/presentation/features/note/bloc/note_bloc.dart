@@ -1,10 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:notes_app/domain/features/notes/repository/notes_repository.dart';
 
 import '../../../../domain/exceptions/app_exception.dart';
 import '../../../../domain/exceptions/notes_exception.dart';
 import '../../../../domain/features/notes/models/note.dart';
 import '../../../../domain/features/notes/models/note_dto.dart';
-import '../../../../domain/features/notes/repository/notes_repository.dart';
 import 'note_event.dart';
 import 'note_state.dart';
 
@@ -45,7 +45,9 @@ class NoteBloc extends Bloc<NoteEvent, NoteState> {
   }
 
   Future<void> onAddEvent(
-      Emitter<NoteState> emit, final NoteDto noteDto,) async {
+    Emitter<NoteState> emit,
+    final NoteDto noteDto,
+  ) async {
     final savingState = state.saving();
 
     emit(savingState);
