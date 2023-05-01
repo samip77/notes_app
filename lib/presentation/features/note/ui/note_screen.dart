@@ -89,38 +89,43 @@ class NoteScreen extends HookWidget {
 
           return Padding(
             padding: const EdgeInsets.all(16.0),
-            child: ListView(
-              controller: scrollController,
-              shrinkWrap: true,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Expanded(
-                  child: Form(
-                    key: _formKey,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        const SizedBox(height: 24.0),
-                        TextFormField(
-                          controller: titleTextEditingController,
-                          decoration: const InputDecoration(
-                            labelText: 'Title',
-                          ),
-                          validator: (value) =>
-                              (value ?? '').isEmpty ? 'Required' : null,
+                  child: ListView(
+                    controller: scrollController,
+                    shrinkWrap: true,
+                    children: [
+                      Form(
+                        key: _formKey,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            const SizedBox(height: 24.0),
+                            TextFormField(
+                              controller: titleTextEditingController,
+                              decoration: const InputDecoration(
+                                labelText: 'Title',
+                              ),
+                              validator: (value) =>
+                                  (value ?? '').isEmpty ? 'Required' : null,
+                            ),
+                            const SizedBox(height: 16.0),
+                            TextFormField(
+                              controller: contentTextEditingController,
+                              minLines: 6,
+                              maxLines: 10,
+                              decoration: const InputDecoration(
+                                labelText: 'Content',
+                              ),
+                              validator: (value) =>
+                                  (value ?? '').isEmpty ? 'Required' : null,
+                            ),
+                          ],
                         ),
-                        const SizedBox(height: 16.0),
-                        TextFormField(
-                          controller: contentTextEditingController,
-                          minLines: 6,
-                          maxLines: 10,
-                          decoration: const InputDecoration(
-                            labelText: 'Content',
-                          ),
-                          validator: (value) =>
-                              (value ?? '').isEmpty ? 'Required' : null,
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
                 SafeArea(
@@ -154,7 +159,7 @@ class NoteScreen extends HookWidget {
                     },
                     child: Text(_saveOption.buttonTitle),
                   ),
-                )
+                ),
               ],
             ),
           );
