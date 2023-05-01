@@ -20,19 +20,23 @@ class GradientAppBar extends HookWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     final opacity = useState(1.0);
 
-    useEffect(() {
-      final controller = scrollController;
-      if (controller == null) return null;
+    useEffect(
+      () {
+        final controller = scrollController;
+        if (controller == null) return null;
 
-      controller.addListener(() {
-        controller.offset > _maxOffset
-            ? opacity.value = 0.0
-            : opacity.value = 1.0;
+        controller.addListener(() {
+          controller.offset > _maxOffset
+              ? opacity.value = 0.0
+              : opacity.value = 1.0;
 
-        opacity.value = max(0, 1 - controller.offset / _maxOffset);
-      });
-      return null;
-    }, [],);
+          /// max(controller.offset, 0) solves the issue with negative scroll offset
+          opacity.value = max(0, 1 - (max(controller.offset, 0) / _maxOffset));
+        });
+        return null;
+      },
+      [],
+    );
 
     return AnimatedOpacity(
       duration: const Duration(milliseconds: _animationDuration),
